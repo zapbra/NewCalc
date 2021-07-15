@@ -1,0 +1,38 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-size: 16px;
+  font-family: Roboto;
+}
+
+.whole-page {
+  width: 100vw;
+}
+
+.container {
+  margin: 0 auto;
+  width: 340px;
+}
+
+#output {
+  background-color: #f2f5ea;
+  width: 100%;
+  height: 40px;
+}
+.button {
+  display: inline-block;
+  float: left;
+  width: 85px;
+  line-height: 35px;
+  text-align: center;
+  border-radius: 0.5em;
+  background-color: #d6dbd2;
+  cursor: pointer;
+}
+#output {
+  text-align: right;
+}
