@@ -2,7 +2,8 @@ window.addEventListener("DOMContentLoaded", () => {
   const operators = ["*", "/", "-", "+", "="];
   const numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
   var EQUATION = "";
-
+  var DOUBLEOPERATOR = [];
+  const textBox = document.getElementById("output");
   (function () {
     for (let i = 0; i <= 9; i++) {
       const button = document.getElementById(`button-${i}`);
@@ -16,35 +17,45 @@ window.addEventListener("DOMContentLoaded", () => {
 
   function display(event) {
     button = event.target.innerText;
-    const textBox = document.getElementById("output");
+
     textBox.innerText = button;
     EQUATION += textBox.innerText;
     equationPrerequisites(EQUATION, button);
   }
   function equation(numbers, operator) {
-    let number1 = Number(numbers[0]);
-    let number2 = Number(numbers[1]);
-    let result = "";
+    let number1 = parseInt(numbers[0]);
+    let number2 = parseInt(numbers[1]);
+    let result = 0;
     if (operator[0] == "+") {
       result = number1 + number2;
       console.log(result);
     }
     if (operator[0] == "-") {
+      result = number1 - number2;
+      console.log(result);
     }
     if (operator[0] == "*") {
+      result = number1 * number2;
+      console.log(result);
     }
     if (operator[0] == "/") {
+      result = number1 / number2;
+      console.log(result);
     }
+    textBox.innerText = result;
   }
 
   function findOperator(equation) {
     return equation.match(/[\-*+\/]/g);
   }
+  function resetGlobals() {
+    EQUATION = "";
+    DOUBLEOPERATOR.shift();
+  }
 
   function equationPrerequisites(EQ, button) {
     let numbers = EQ.split(/[\-*+\/]/g);
     let operator = "";
-    let doubleOperator = "";
     let ifNumber = numbers.indexOf(button);
     ifNumber = numbers[ifNumber];
     let ifOperator = operators.indexOf(button);
@@ -54,15 +65,21 @@ window.addEventListener("DOMContentLoaded", () => {
       if (EQ[EQ.length - 1] == "=") {
         operator = [findOperator(EQ)];
       } else {
-        doubleOperator = [findOperator(EQ)];
+        DOUBLEOPERATOR.push(findOperator(EQ));
       }
     }
     if (ifOperator === undefined) {
     }
 
-    if (doubleOperator.length == 2 || operator.length == 1) {
+    if (operator.length == 1) {
+      resetGlobals();
       equation(numbers, operator);
     }
+    if (DOUBLEOPERATOR.length >= 2) {
+      equation(numbers, DOUBLEOPERATOR[0]);
+    }
+    console.log(numbers);
+    console.log(EQUATION);
   }
 
   function add(num1, num2) {
