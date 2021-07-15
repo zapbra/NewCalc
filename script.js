@@ -46,15 +46,22 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 
   function findOperator(equation) {
+    console.log(equation);
     return equation.match(/[\-*+\/]/g);
   }
+
   function resetGlobals() {
-    EQUATION = "";
     DOUBLEOPERATOR.shift();
+    console.log(DOUBLEOPERATOR);
+    EQUATION = `${textBox.innerText}${DOUBLEOPERATOR}`;
+    console.log(EQUATION);
+    //EQUATION += DOUBLEOPERATOR[0];
   }
 
   function equationPrerequisites(EQ, button) {
     let numbers = EQ.split(/[\-*+\/]/g);
+    //console.log(EQ);
+    //console.log(numbers);
     let operator = "";
 
     let ifNumber = numbers.indexOf(button);
@@ -66,18 +73,18 @@ window.addEventListener("DOMContentLoaded", () => {
       if (EQ[EQ.length - 1] == "=") {
         operator = [findOperator(EQ)];
       } else {
-        DOUBLEOPERATOR.push(findOperator(EQ));
+        let lastOperator = findOperator(EQ);
+        DOUBLEOPERATOR.push(lastOperator[lastOperator.length - 1]);
       }
     }
     if (ifOperator === undefined) {
     }
 
     if (operator.length == 1) {
-      resetGlobals();
       equation(numbers, operator);
+      resetGlobals();
     }
     if (DOUBLEOPERATOR.length >= 2) {
-      console.log(EQ);
       equation(numbers, DOUBLEOPERATOR[0]);
       resetGlobals();
     }
