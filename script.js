@@ -13,6 +13,8 @@ window.addEventListener("DOMContentLoaded", () => {
       const button = document.getElementById(`button${operators[operator]}`);
       button.addEventListener("click", display);
     }
+    document.getElementById("clear").addEventListener("click", clearScreen);
+    document.getElementById("delete").addEventListener("click", deleteScreen);
   })();
 
   function display(event) {
@@ -22,6 +24,19 @@ window.addEventListener("DOMContentLoaded", () => {
     EQUATION += textBox.innerText;
     equationPrerequisites(EQUATION, button);
   }
+
+  function clearScreen() {
+    EQUATION = "";
+    DOUBLEOPERATOR = [];
+    textBox.textContent = "";
+  }
+
+  function deleteScreen() {
+    EQUATION = EQUATION.slice(0, EQUATION.length - 1);
+    textBox.textContent = EQUATION;
+    console.log(EQUATION);
+  }
+
   function equation(numbers, operator) {
     let number1 = parseInt(numbers[0]);
     let number2 = parseInt(numbers[1]);
@@ -59,9 +74,9 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 
   function equationPrerequisites(EQ, button) {
+    console.log(EQ);
     let numbers = EQ.split(/[\-*+\/]/g);
-    //console.log(EQ);
-    //console.log(numbers);
+
     let operator = "";
 
     let ifNumber = numbers.indexOf(button);
