@@ -56,6 +56,7 @@ window.addEventListener("DOMContentLoaded", () => {
   function equationPrerequisites(EQ, button) {
     let numbers = EQ.split(/[\-*+\/]/g);
     let operator = "";
+
     let ifNumber = numbers.indexOf(button);
     ifNumber = numbers[ifNumber];
     let ifOperator = operators.indexOf(button);
@@ -76,10 +77,10 @@ window.addEventListener("DOMContentLoaded", () => {
       equation(numbers, operator);
     }
     if (DOUBLEOPERATOR.length >= 2) {
+      console.log(EQ);
       equation(numbers, DOUBLEOPERATOR[0]);
+      resetGlobals();
     }
-    console.log(numbers);
-    console.log(EQUATION);
   }
 
   function add(num1, num2) {
