@@ -1,18 +1,7 @@
 window.addEventListener("DOMContentLoaded", () => {
   const operators = ["*", "/", "-", "+", "="];
   const numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
-  const keys = [
-    "Digit0",
-    "Digit1",
-    "Digit2",
-    "Digit3",
-    "Digit4",
-    "Digit5",
-    "Digit6",
-    "Digit7",
-    "Digit8",
-    "Digit9",
-  ];
+
   var EQUATION = "";
   var DOUBLEOPERATOR = [];
   const textBox = document.getElementById("output");
@@ -29,9 +18,7 @@ window.addEventListener("DOMContentLoaded", () => {
     document.getElementById("clear").addEventListener("click", clearScreen);
     document.getElementById("delete").addEventListener("click", deleteScreen);
     document.getElementById("button.").addEventListener("click", display);
-    document.addEventListener("keydown", (e) => {
-      console.log(e.target.id);
-    });
+    document.addEventListener("keydown", display);
   })();
 
   function preError(button) {
@@ -52,7 +39,6 @@ window.addEventListener("DOMContentLoaded", () => {
           return 1;
         }
       } else {
-        console.log("?");
         if (button == "." && numbers[1].includes(".")) {
           return 1;
         }
@@ -63,13 +49,18 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 
   function display(event) {
-    button = event.target.innerText;
+    if (event.type == "keydown") {
+      button = event.key;
+    } else {
+      button = event.target.innerText;
+    }
     if (preError(button)) {
       return;
     }
 
     textBox.innerText = button;
     EQUATION += textBox.innerText;
+
     equationPrerequisites(EQUATION, button);
   }
 
@@ -115,18 +106,14 @@ window.addEventListener("DOMContentLoaded", () => {
 
   function resetGlobals() {
     DOUBLEOPERATOR.shift();
-    console.log(DOUBLEOPERATOR);
     EQUATION = `${textBox.innerText}${DOUBLEOPERATOR}`;
 
     //EQUATION += DOUBLEOPERATOR[0];
   }
 
   function equationPrerequisites(EQ, button) {
-    console.log(EQ);
     let numbers = EQ.split(/[\-*+\/]/g);
-
     let operator = "";
-
     let ifNumber = numbers.indexOf(button);
     ifNumber = numbers[ifNumber];
     let ifOperator = operators.indexOf(button);
@@ -136,7 +123,8 @@ window.addEventListener("DOMContentLoaded", () => {
       if (EQ[EQ.length - 1] == "=") {
         operator = [findOperator(EQ)];
       }
-      if (operators.includes(EQ[EQ.LENGTH - 1])) {
+
+      if (operators.includes(EQUATION[EQUATION.length - 1])) {
         let lastOperator = findOperator(EQ);
         DOUBLEOPERATOR.push(lastOperator[lastOperator.length - 1]);
       }
