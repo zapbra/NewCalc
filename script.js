@@ -25,6 +25,7 @@ window.addEventListener("DOMContentLoaded", () => {
     for (let operator in operators) {
       const button = document.getElementById(`button${operators[operator]}`);
       button.addEventListener("click", display);
+      button.style.backgroundColor = "#c3b299";
     }
     document.getElementById("clear").addEventListener("click", clearScreen);
     document.getElementById("delete").addEventListener("click", deleteScreen);
