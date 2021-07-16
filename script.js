@@ -1,9 +1,22 @@
 window.addEventListener("DOMContentLoaded", () => {
   const operators = ["*", "/", "-", "+", "="];
   const numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+  const keys = [
+    "Digit0",
+    "Digit1",
+    "Digit2",
+    "Digit3",
+    "Digit4",
+    "Digit5",
+    "Digit6",
+    "Digit7",
+    "Digit8",
+    "Digit9",
+  ];
   var EQUATION = "";
   var DOUBLEOPERATOR = [];
   const textBox = document.getElementById("output");
+
   (function () {
     for (let i = 0; i <= 9; i++) {
       const button = document.getElementById(`button-${i}`);
@@ -16,6 +29,9 @@ window.addEventListener("DOMContentLoaded", () => {
     document.getElementById("clear").addEventListener("click", clearScreen);
     document.getElementById("delete").addEventListener("click", deleteScreen);
     document.getElementById("button.").addEventListener("click", display);
+    document.addEventListener("keydown", (e) => {
+      console.log(e.target.id);
+    });
   })();
 
   function preError(button) {
@@ -137,21 +153,5 @@ window.addEventListener("DOMContentLoaded", () => {
       equation(numbers, DOUBLEOPERATOR[0]);
       resetGlobals();
     }
-  }
-
-  function add(num1, num2) {
-    return num1 + num2;
-  }
-
-  function subtract(num1, num2) {
-    return num1 - num2;
-  }
-
-  function multiply(num1, num2) {
-    return num1 * num2;
-  }
-
-  function divide(num1, num2) {
-    return num1 / num2;
   }
 });
