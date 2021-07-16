@@ -1,7 +1,18 @@
 window.addEventListener("DOMContentLoaded", () => {
   const operators = ["*", "/", "-", "+", "="];
   const numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
-
+  const numberKeys = [
+    "Digit0",
+    "Digit1",
+    "Digit2",
+    "Digit3",
+    "Digit4",
+    "Digit5",
+    "Digit6",
+    "Digit7",
+    "Digit8",
+    "Digit9",
+  ];
   var EQUATION = "";
   var DOUBLEOPERATOR = [];
   const textBox = document.getElementById("output");
@@ -49,10 +60,13 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 
   function display(event) {
-    if (event.type == "keydown") {
+    if (event.type == "keydown" && numberKeys.includes(event.code)) {
+      console.log(event.key);
       button = event.key;
-    } else {
+    } else if (event.type == "click") {
       button = event.target.innerText;
+    } else {
+      return;
     }
     if (preError(button)) {
       return;
@@ -96,7 +110,13 @@ window.addEventListener("DOMContentLoaded", () => {
       result = number1 / number2;
       console.log(result);
     }
-    textBox.innerText = result;
+    if (result == Infinity) {
+      window.alert("You shouldn't divide by 0, silly.");
+      textBox.innerText = "";
+      resetGlobals();
+    } else {
+      textBox.innerText = result;
+    }
   }
 
   function findOperator(equation) {
@@ -107,8 +127,6 @@ window.addEventListener("DOMContentLoaded", () => {
   function resetGlobals() {
     DOUBLEOPERATOR.shift();
     EQUATION = `${textBox.innerText}${DOUBLEOPERATOR}`;
-
-    //EQUATION += DOUBLEOPERATOR[0];
   }
 
   function equationPrerequisites(EQ, button) {
