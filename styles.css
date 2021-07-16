@@ -37,6 +37,7 @@ body {
   cursor: pointer;
   box-shadow: 5px 5px #523249;
 }
+
 .top-row-button:active {
   box-shadow: none;
 }
