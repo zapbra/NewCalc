@@ -1,3 +1,3 @@
 # NewCalc
 For The Odin Project 
-https://miscany.github.io/NewCalc/
+https://avajscript.github.io/NewCalc/
