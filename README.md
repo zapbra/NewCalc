@@ -1,3 +1,3 @@
 # NewCalc
 Calculator for the Odin Project 
-Live Demo: https://avajscript.github.io/NewCalc/
+Live Demo: https://zapbra.github.io/NewCalc/
